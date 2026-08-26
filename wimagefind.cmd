@@ -1,0 +1,1 @@
+start "hashfinder" cmd.exe /k "python "%~dp0imagefind.py""

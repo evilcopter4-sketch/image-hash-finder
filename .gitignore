@@ -1,0 +1,22 @@
+# Local search log file
+search_results.txt
+
+# Python cache & compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating System junk files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Virtual Environments (if you ever use them)
+venv/
+.venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
