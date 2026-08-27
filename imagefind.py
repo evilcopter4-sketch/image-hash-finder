@@ -24,31 +24,8 @@ while True:
                 searchtype = input("press the number beside the scrape option to select that scrape option: \n 1. search for the hash\n  2. search for the name\n  3. use google lens \n").strip('"\'')
 
                 if searchtype == "1":
-                        matches = 0
-                        output_filename = "search_results.txt"
-                
-                        # Open log file for saving results
-                        with open(output_filename, "a", encoding="utf-8") as out_file:
-                            out_file.write(f"\n--- Search results for: {targselect} (pHash: {hashval}) ---\n")
-                    
-                            for root, dirs, files in os.walk(pselect):
-                                for f in files:
-                                    if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp', '.bmp')) and f != targselect:
-                                        img_path = os.path.join(root, f)
-                                        try:
-                                            other_hash = imagehash.phash(Image.open(img_path))
-                                            distance = hashval - other_hash  # Hamming distance
-                                            if distance <= 10:
-                                                result_line = f"  [Match found! Distance: {distance}] -> {img_path}"
-                                                print(result_line)
-                                                out_file.write(result_line + "\n")
-                                                matches += 1
-                                        except Exception:
-                                            continue
-                                    
-                    out_file.write(f"Total matches found: {matches}\n")
-                print(f"Finished. Found {matches} matching image(s).\n")
-                        
+                        query = urllib.parse.quote(str(hashval))
+
                     elif searchtype == "2":
                         query = urllib.parse.quote(targselect)
                         webbrowser.open(f"https://www.google.com/search?tbm=isch&q={query}")
