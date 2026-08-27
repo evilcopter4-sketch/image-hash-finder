@@ -25,6 +25,7 @@ while True:
 
                 if searchtype == "1":
                         query = urllib.parse.quote(str(hashval))
+                        webbrowser.open(f"https://www.google.com/search?q={query}")
 
                     elif searchtype == "2":
                         query = urllib.parse.quote(targselect)
