@@ -34,6 +34,11 @@ def wshort(targcmd, name, targicon):
     $Shortcut.Save()
     """
     
+    #this bit will install the required modules for windows, hopefully. note that this file was made on a windows computer.
+    #this is probably why it threw so many errors.
+    subprocess.run(["pip", "install", "imagehash"], check=True)
+    subprocess.run(["pip", "install", "pillow"], check=True)
+    
     subprocess.run(["powershell", "-NoProfile", "-Command", ps_script], check=True)
     print(f"Created shortcut at: {shortpath}")
 
@@ -46,14 +51,23 @@ Name={name}
 Icon={tarcon}
 Exec={targtrm}
 """
+
+    try:
+        subprocess.run(["sudo", "apt", "update", "-y"], check=True)
+    except subprocess.CalledProcessError:
+        print("sudo apt update failed. did you run this without sudo, and did you provide the correct password?")
+        return
+        
+    subprocess.run(["pip", "install", "--user", "pillow"], check=True)
+    subprocess.run(["pip", "install", "--user", "imagehash"], check=True)
+    
     shortpath.write_text(lindeskcont)
     shortpath.chmod(0o755)
     print(f"succesfully created shortcut at {shortpath}")
 
 #had to call this here so that the allfiles.append("wimagefind.cmd") would work
 k = detectos()
-subprocess.run([sys.executable, "-m", "pip", "install", "pillow"], check=True)
-subprocess.run([sys.executable, "-m", "pip", "install", "imagehash"], check=True)
+
 #check if all files are present
 allfiles = ["imagefind.py", "hashfind.ico"]
 if k in ("windows", "Windows"):
