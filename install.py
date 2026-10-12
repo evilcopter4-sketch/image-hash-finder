@@ -35,9 +35,10 @@ def wshort(targcmd, name, targicon):
     """
     
     #this bit will install the required modules for windows, hopefully. note that this file was made on a windows computer.
-    #this is probably why it threw so many errors.
+    #this is probably why it threw so many errors on linux.
     subprocess.run(["pip", "install", "imagehash"], check=True)
     subprocess.run(["pip", "install", "pillow"], check=True)
+    subprocess.run(["pip", "install", "io"], check=True)
     
     subprocess.run(["powershell", "-NoProfile", "-Command", ps_script], check=True)
     print(f"Created shortcut at: {shortpath}")
@@ -69,7 +70,7 @@ Exec={targtrm}
 k = detectos()
 
 #check if all files are present
-allfiles = ["imagefind.py", "hashfind.ico"]
+allfiles = ["imagefind.py", "hashfind.ico", "test.py"]
 if k in ("windows", "Windows"):
     allfiles.append("wimagefind.cmd")
 
